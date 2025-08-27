@@ -15,12 +15,21 @@ public class HomeController {
     model.addAttribute("currentTime",
         LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-    // Use direct HTML content instead of fragments
+    // Get environment from system property or environment variable
+    String environment = System.getProperty("spring.profiles.active");
+    if (environment == null || environment.isEmpty()) {
+      environment = System.getenv("SPRING_PROFILES_ACTIVE");
+    }
+    if (environment == null || environment.isEmpty()) {
+      environment = "local"; // default fallback
+    }
+
     model.addAttribute("content", """
         <div class="feature">
-            <h3>Welcome to Itai Java playground (Home Controller)</h3>
+            <h3>Welcome to Spring Railway App</h3>
+            <p><strong>Environment: %s</strong></p>
             <p>Current time: %s</p>
-            <p>The application is running successfully! TEST3</p>
+            <p>The application is running successfully!</p>
 
             <div class="feature">
                 <h3>Quick Actions</h3>
@@ -34,7 +43,8 @@ public class HomeController {
                 </a>
             </div>
         </div>
-        """.formatted(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+        """.formatted(environment.toUpperCase(),
+        LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 
     return "layout";
   }
