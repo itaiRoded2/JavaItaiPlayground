@@ -6,7 +6,26 @@
     <div class="feature">
       <h3>Welcome to Spring Railway App</h3>
       <p>Current time: <span th:text="${currentTime}"></span></p>
-      <p>This is the home page content loaded from a fragment.</p>
+      <p>Page title: <span th:text="${pageTitle}"></span></p>
+
+      <div class="feature">
+        <h3>Application Status</h3>
+        <p>✅ Spring Boot is running</p>
+        <p>✅ Thymeleaf templates working</p>
+        <p>✅ Layout system functional</p>
+      </div>
+
+      <div class="feature">
+        <h3>Quick Actions</h3>
+        <a href="/users" class="btn btn-primary">
+          <i class="fas fa-users"></i>
+          Manage Users
+        </a>
+        <a href="/test" class="btn btn-success">
+          <i class="fas fa-flask"></i>
+          Run Tests
+        </a>
+      </div>
     </div>
   </div>
 </body>

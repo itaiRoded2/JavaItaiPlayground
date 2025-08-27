@@ -369,10 +369,15 @@
     </div>
   </nav>
 
+  <!-- The key difference:
+  
+  th:insert expects a template/fragment reference
+  th:utext renders HTML content directly (unescaped text) -->
+  <!-- Main Content -->
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
-      <div th:insert="${content}"></div>
+      <div th:utext="${content}"></div> <!-- TO THIS -->
     </div>
   </main>
 

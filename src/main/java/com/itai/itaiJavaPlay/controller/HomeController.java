@@ -12,13 +12,31 @@ public class HomeController {
   @GetMapping("/")
   public String home(Model model) {
     model.addAttribute("pageTitle", "Home");
-    model.addAttribute("template", "index"); // This tells layout.html which template to load
     model.addAttribute("currentTime",
         LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-    model.addAttribute("contentTemplate", "fragments/home :: content");
+    // Use direct HTML content instead of fragments
+    model.addAttribute("content", """
+        <div class="feature">
+            <h3>Welcome to Spring Railway App</h3>
+            <p>Current time: %s</p>
+            <p>The application is running successfully!</p>
 
-    return "layout"; // Always Returns layout.html
+            <div class="feature">
+                <h3>Quick Actions</h3>
+                <a href="/users" class="btn btn-primary">
+                    <i class="fas fa-users"></i>
+                    Manage Users
+                </a>
+                <a href="/test" class="btn btn-success">
+                    <i class="fas fa-flask"></i>
+                    Run Tests
+                </a>
+            </div>
+        </div>
+        """.formatted(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+
+    return "layout";
   }
 
   @GetMapping("/users")
