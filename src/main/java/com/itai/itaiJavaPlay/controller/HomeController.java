@@ -21,30 +21,40 @@ public class HomeController {
       environment = System.getenv("SPRING_PROFILES_ACTIVE");
     }
     if (environment == null || environment.isEmpty()) {
+      // Check Railway's built-in environment variable
+      environment = System.getenv("RAILWAY_ENVIRONMENT");
+    }
+    if (environment == null || environment.isEmpty()) {
       environment = "local"; // default fallback
     }
 
-    model.addAttribute("content", """
-        <div class="feature">
-            <h3>Welcome to Spring Railway App</h3>
-            <p><strong>Environment: %s</strong></p>
-            <p>Current time: %s</p>
-            <p>The application is running successfully!</p>
-
+    model.addAttribute("content",
+        """
             <div class="feature">
-                <h3>Quick Actions</h3>
-                <a href="/users" class="btn btn-primary">
-                    <i class="fas fa-users"></i>
-                    Manage Users
-                </a>
-                <a href="/test" class="btn btn-success">
-                    <i class="fas fa-flask"></i>
-                    Run Tests
-                </a>
+                <h3>Welcome to Spring Railway App</h3>
+                <p><strong>Environment: %s</strong></p>
+                <p>Current time: %s</p>
+                <p>The application is running successfully!</p>
+                <p><strong>Online URL:</strong> <a href="https://itaijavaplay-production.up.railway.app/" target="_blank" class="btn btn-info" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; margin-left: 8px;">
+                    <i class="fas fa-external-link-alt"></i>
+                    Visit Production
+                </a></p>
+
+                <div class="feature">
+                    <h3>Quick Actions</h3>
+                    <a href="/users" class="btn btn-primary">
+                        <i class="fas fa-users"></i>
+                        Manage Users
+                    </a>
+                    <a href="/test" class="btn btn-success">
+                        <i class="fas fa-flask"></i>
+                        Run Tests
+                    </a>
+                </div>
             </div>
-        </div>
-        """.formatted(environment.toUpperCase(),
-        LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+            """
+            .formatted(environment.toUpperCase(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 
     return "layout";
   }
