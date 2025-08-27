@@ -18,7 +18,7 @@ public class HomeController {
     // Use direct HTML content instead of fragments
     model.addAttribute("content", """
         <div class="feature">
-            <h3>Welcome to Spring Railway App</h3>
+            <h3>Welcome to Itai Java playground (Home Controller)</h3>
             <p>Current time: %s</p>
             <p>The application is running successfully! TEST3</p>
 
