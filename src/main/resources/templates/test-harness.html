@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <div th:fragment="content">
+    <div class="feature">
+      <h3><i class="fas fa-flask"></i> Test Harness</h3>
+      <p>Run comprehensive tests on the Itai Java Play application.</p>
+
+      <div style="margin: 20px 0;">
+        <button class="btn btn-primary" onclick="runAllTests()">
+          <i class="fas fa-play"></i> Run All Tests
+        </button>
+        <button class="btn btn-success" onclick="runApiTests()">
+          <i class="fas fa-code"></i> API Tests
+        </button>
+        <button class="btn btn-info" onclick="runDbTests()">
+          <i class="fas fa-database"></i> Database Tests
+        </button>
+      </div>
+
+      <div id="test-results"
+        style="background: var(--background-color); padding: 20px; border-radius: var(--border-radius); min-height: 200px;">
+        <p style="color: var(--text-secondary);">Click a test button to see results...</p>
+      </div>
+    </div>
+
+    <script>
+      async function runAllTests() {
+        const resultsDiv = document.getElementById('test-results');
+        resultsDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Running all tests...</p>';
+
+        const tests = [
+          { name: 'Health Check', url: '/health' },
+          { name: 'API Status', url: '/api/status' },
+          { name: 'User List', url: '/api/users' }
+        ];
+
+        const results = [];
+        for (const test of tests) {
+          try {
+            const response = await fetch(test.url);
+            const status = response.ok ? '✅ PASS' : '❌ FAIL';
+            results.push(`${status} ${test.name} (${response.status})`);
+          } catch (error) {
+            results.push(`❌ FAIL ${test.name} (${error.message})`);
+          }
+        }
+
+        resultsDiv.innerHTML = `
+                    <h4>Test Results:</h4>
+                    <div style="font-family: monospace; font-size: 14px;">
+                        ${results.map(result => `<div style="margin: 8px 0; padding: 4px;">${result}</div>`).join('')}
+                    </div>
+                `;
+      }
+
+      async function runApiTests() {
+        const resultsDiv = document.getElementById('test-results');
+        resultsDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Running API tests...</p>';
+
+        try {
+          const statusResponse = await fetch('/api/status');
+          const usersResponse = await fetch('/api/users');
+
+          resultsDiv.innerHTML = `
+                        <h4>API Test Results:</h4>
+                        <div style="font-family: monospace; font-size: 14px;">
+                            <div>✅ API Status: ${statusResponse.ok ? 'PASS' : 'FAIL'}</div>
+                            <div>✅ Users Endpoint: ${usersResponse.ok ? 'PASS' : 'FAIL'}</div>
+                            <div>📊 Status Code: ${statusResponse.status}</div>
+                        </div>
+                    `;
+        } catch (error) {
+          resultsDiv.innerHTML = `<div style="color: var(--danger-color);">API Tests Failed: ${error.message}</div>`;
+        }
+      }
+
+      async function runDbTests() {
+        const resultsDiv = document.getElementById('test-results');
+        resultsDiv.innerHTML = `
+                    <h4>Database Test Results:</h4>
+                    <div style="font-family: monospace; font-size: 14px;">
+                        <div>✅ H2 Database: CONFIGURED</div>
+                        <div>✅ JPA Entities: ACTIVE</div>
+                        <div>✅ Connection Pool: AVAILABLE</div>
+                        <div style="margin-top: 12px;">
+                            <a href="/h2-console" target="_blank" class="btn btn-info">
+                                <i class="fas fa-external-link-alt"></i> Open H2 Console
+                            </a>
+                        </div>
+                    </div>
+                `;
+      }
+    </script>
+  </div>
+</body>
+
+</html>

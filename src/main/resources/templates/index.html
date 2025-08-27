@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <div th:fragment="content">
+    <!-- Welcome Section -->
+    <div class="feature">
+      <h3>
+        <i class="fas fa-rocket" style="color: var(--primary-color);"></i>
+        Welcome to Itai Java Play
+      </h3>
+      <p style="color: var(--text-secondary); margin-bottom: 16px;">
+        A full-stack Java application with REST API, web interface, and test harness.
+      </p>
+      <div style="background: rgba(37, 99, 235, 0.1); padding: 12px 16px; border-radius: var(--border-radius);">
+        <strong>Current Time:</strong> <span th:text="${currentTime}">2024-01-15 14:30:00</span>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="feature">
+      <h3>Quick Actions</h3>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="/users" class="btn btn-primary">
+          <i class="fas fa-users"></i> Manage Users
+        </a>
+        <a href="/test" class="btn btn-success">
+          <i class="fas fa-flask"></i> Test Harness
+        </a>
+        <button class="btn btn-info" onclick="checkApiStatus()">
+          <i class="fas fa-heartbeat"></i> Check API
+        </button>
+      </div>
+    </div>
+
+    <script>
+      async function checkApiStatus() {
+        try {
+          const data = await window.AppUtils.apiCall('/api/status');
+          window.AppUtils.showAlert(`API Status: ${data.status}`, 'success');
+        } catch (error) {
+          window.AppUtils.showAlert('API check failed', 'danger');
+        }
+      }
+    </script>
+  </div>
+</body>
+
+</html>
