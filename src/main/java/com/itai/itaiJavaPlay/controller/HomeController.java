@@ -20,7 +20,7 @@ public class HomeController {
         <div class="feature">
             <h3>Welcome to Spring Railway App</h3>
             <p>Current time: %s</p>
-            <p>The application is running successfully! TEST</p>
+            <p>The application is running successfully! TEST2</p>
 
             <div class="feature">
                 <h3>Quick Actions</h3>
