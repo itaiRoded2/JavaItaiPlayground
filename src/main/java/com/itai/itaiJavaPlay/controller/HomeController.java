@@ -34,41 +34,6 @@ public class HomeController {
     return "fragments/home";
   }
 
-  // @GetMapping("/users")
-  // public String users(Model model) {
-  // model.addAttribute("pageTitle", "User Management");
-
-  // model.addAttribute("content", """
-  // <div class="feature">
-  // <h3>User Management</h3>
-  // <p>Manage application users and their permissions.</p>
-
-  // <div class="feature">
-  // <h3>User Actions</h3>
-  // <a href="/users/create" class="btn btn-success">
-  // <i class="fas fa-user-plus"></i>
-  // Add New User
-  // </a>
-  // <a href="/users/list" class="btn btn-primary">
-  // <i class="fas fa-list"></i>
-  // View All Users
-  // </a>
-  // <a href="/users/search" class="btn btn-info">
-  // <i class="fas fa-search"></i>
-  // Search Users
-  // </a>
-  // </div>
-
-  // <div class="feature">
-  // <h3>Recent Users</h3>
-  // <p>No users found. <a href="/users/create">Create your first user</a></p>
-  // </div>
-  // </div>
-  // """);
-
-  // return "layout"; // Still returns layout to keep your header/nav/styling
-  // }
-
   @GetMapping("/users")
   public String users(Model model) {
     model.addAttribute("pageTitle", "User Management");

@@ -1,6 +1,5 @@
 package com.itai.itaiJavaPlay.controller;
 
-
 import com.itai.itaiJavaPlay.model.User;
 import com.itai.itaiJavaPlay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class ApiController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = new ArrayList<>();
-        //users = userService.getAllUsers();
+        users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
@@ -43,10 +42,10 @@ public class ApiController {
     public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
         try {
-            //User savedUser = userService.saveUser(user);
+            User savedUser = userService.saveUser(user);
             response.put("success", true);
             response.put("message", "User created successfully");
-            //response.put("user", savedUser);
+            response.put("user", savedUser);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("success", false);
@@ -59,7 +58,7 @@ public class ApiController {
     public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-            //userService.deleteUser(id);
+            userService.deleteUser(id);
             response.put("success", true);
             response.put("message", "User deleted successfully");
             return ResponseEntity.ok(response);
