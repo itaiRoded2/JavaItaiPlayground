@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${pageTitle != null ? pageTitle + ' - Itai Java playground' : 'Itai Java playground'}">Itai Java
-    playground
-  </title>
+    playground</title>
   <link rel="icon" href="/favicon.ico">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
+  <th:block layout:fragment="head"></th:block>
   <style>
     * {
       margin: 0;
@@ -50,7 +49,6 @@
       padding: 0 20px;
     }
 
-    /* Header */
     .header {
       background: var(--surface-color);
       border-bottom: 1px solid var(--border-color);
@@ -78,7 +76,6 @@
       font-size: 28px;
     }
 
-    /* Navigation */
     .nav-section {
       background: var(--surface-color);
       border-bottom: 1px solid var(--border-color);
@@ -153,12 +150,10 @@
       background: linear-gradient(135deg, var(--primary-hover), #1e40af);
     }
 
-    /* Main Content */
     .main-content {
       padding: 32px 0;
     }
 
-    /* Feature Cards */
     .feature {
       background: var(--surface-color);
       border: 1px solid var(--border-color);
@@ -180,7 +175,6 @@
       margin-bottom: 12px;
     }
 
-    /* Forms */
     .form-group {
       margin-bottom: 20px;
     }
@@ -212,7 +206,6 @@
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
-    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -265,7 +258,6 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* Status Messages */
     .alert {
       padding: 12px 16px;
       border-radius: var(--border-radius);
@@ -293,7 +285,6 @@
       border: 1px solid rgba(2, 132, 199, 0.2);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
@@ -311,24 +302,22 @@
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="container">
       <div class="header-content">
         <a href="/" class="logo">
           <i class="fas fa-leaf"></i>
-          Itai Java playground (layout.html)
+          Itai Java playground
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Navigation -->
   <nav class="nav-section">
     <div class="container">
       <h2 class="nav-title">
         <i class="fas fa-compass"></i>
-        Navigation TEST
+        Navigation
       </h2>
       <div class="nav-grid">
         <a href="/" class="nav-item">
@@ -370,32 +359,26 @@
     </div>
   </nav>
 
-  <!-- The key difference:
-  
-  th:insert expects a template/fragment reference
-  th:utext renders HTML content directly (unescaped text) -->
-  <!-- Main Content -->
-  <!-- Main Content -->
   <main class="main-content">
     <div class="container">
-      <div th:utext="${content}"></div> <!-- TO THIS -->
+      <th:block layout:fragment="content">
+        <div class="feature">
+          <h3>Default Content</h3>
+          <p>This is the default layout content.</p>
+        </div>
+      </th:block>
     </div>
   </main>
-
   <script>
-    // Global JavaScript utilities
     window.AppUtils = {
       showAlert: function (message, type = 'info') {
         const alert = document.createElement('div');
         alert.className = `alert alert-${type}`;
         alert.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
-
         const container = document.querySelector('.container');
         container.insertBefore(alert, container.firstChild);
-
         setTimeout(() => alert.remove(), 5000);
       },
-
       apiCall: async function (url, options = {}) {
         try {
           const response = await fetch(url, {
@@ -414,6 +397,7 @@
       }
     };
   </script>
+  <th:block layout:fragment="script"></th:block>
 </body>
 
 </html>
