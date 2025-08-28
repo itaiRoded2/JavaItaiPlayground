@@ -16,6 +16,20 @@
       box-sizing: border-box;
     }
 
+    .nav-item.active-nav {
+      background: rgba(37, 99, 235, 0.1);
+      /* Lighter version of the primary color */
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .nav-item.active-nav .nav-text,
+    .nav-item.active-nav i {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
     :root {
       --primary-color: #2563eb;
       --primary-hover: #1d4ed8;
@@ -320,28 +334,28 @@
         Navigation
       </h2>
       <div class="nav-grid">
-        <a href="/" class="nav-item">
+        <a href="/" class="nav-item" th:classappend="${requestURI == '/' ? 'active-nav' : ''}">
           <i class="fas fa-home"></i>
           <div>
             <div class="nav-text">Home</div>
             <div class="nav-desc">Return to main dashboard</div>
           </div>
         </a>
-        <a href="/users" class="nav-item">
+        <a href="/users" class="nav-item" th:classappend="${requestURI == '/users' ? 'active-nav' : ''}">
           <i class="fas fa-users"></i>
           <div>
             <div class="nav-text">User Management</div>
             <div class="nav-desc">Manage application users</div>
           </div>
         </a>
-        <a href="/test" class="nav-item">
+        <a href="/test" class="nav-item" th:classappend="${requestURI == '/test' ? 'active-nav' : ''}">
           <i class="fas fa-flask"></i>
           <div>
             <div class="nav-text">Test Harness</div>
             <div class="nav-desc">Run application tests</div>
           </div>
         </a>
-        <a href="/api/status" class="nav-item">
+        <a href="/api/status" class="nav-item" th:classappend="${requestURI == '/api/status' ? 'active-nav' : ''}">
           <i class="fas fa-heartbeat"></i>
           <div>
             <div class="nav-text">API Status</div>
