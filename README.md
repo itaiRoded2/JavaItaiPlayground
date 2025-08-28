@@ -14,6 +14,10 @@ http://localhost:8080/
 
 # Deploy
 
+TODO move to
+https://dashboard.render.com/
+
+Railway works but cost
 npm i -g @railway/cli
 railway login
 railway link
