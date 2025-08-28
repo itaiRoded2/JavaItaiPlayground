@@ -37,12 +37,12 @@ public class HomeController {
     return "layout";
   }
 
-  @GetMapping("/users")
-  public String users(Model model) {
-    model.addAttribute("pageTitle", "User Management");
-    model.addAttribute("template", "fragments/users");
-    return "layout"; // Return the main layout template
-  }
+  // @GetMapping("/users")
+  // public String users(Model model) {
+  // model.addAttribute("pageTitle", "User Management");
+  // model.addAttribute("template", "fragments/users");
+  // return "layout"; // Return the main layout template
+  // }
 
   @GetMapping("/test")
   public String testHarness(Model model) {
