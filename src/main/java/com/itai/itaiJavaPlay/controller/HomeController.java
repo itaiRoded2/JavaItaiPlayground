@@ -30,15 +30,18 @@ public class HomeController {
 
     model.addAttribute("environment", environment.toUpperCase());
 
-    // Return the template name directly - Thymeleaf Layout Dialect handles the rest
-    return "fragments/home";
+    // Specify the fragment name
+    model.addAttribute("template", "home");
+    // model.addAttribute("template", "home");
+    // Return the main layout template
+    return "layout";
   }
 
   @GetMapping("/users")
   public String users(Model model) {
     model.addAttribute("pageTitle", "User Management");
-    model.addAttribute("template", "users");
-    return "layout";
+    model.addAttribute("template", "fragments/users");
+    return "layout"; // Return the main layout template
   }
 
   @GetMapping("/test")

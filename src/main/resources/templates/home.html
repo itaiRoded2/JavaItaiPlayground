@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout}">
-
-<head>
-  <title>Home</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-  <div layout:fragment="content">
+  <div th:fragment="content">
     <div class="feature">
       <h3>Welcome to Spring Railway App</h3>
       <p><strong>Environment: <span th:text="${environment}"></span></strong></p>
       <p>Current time: <span th:text="${currentTime}"></span></p>
       <p>The application is running successfully!</p>
-      <p><strong>Online URL:</strong>
+      <p>
+        <strong>Online URL:</strong>
         <a href="https://itaijavaplay-production.up.railway.app/" target="_blank" class="btn btn-info"
           style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; margin-left: 8px;">
           <i class="fas fa-external-link-alt"></i>
           Visit Production
         </a>
       </p>
-
       <div class="feature">
         <h3>Quick Actions</h3>
         <a href="/users" class="btn btn-primary">
