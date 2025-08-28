@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <title>User Management</title>
-</head>
-
 <body>
   <div th:fragment="content">
-    <div class="feature">
-      <h3>User Management</h3>
-      <p>Manage application users and their permissions.</p>
+    <div class="p-6 bg-white rounded-xl shadow-md space-y-4 transition-all duration-300 transform hover:scale-105">
+      <h3 class="text-3xl font-bold text-gray-900">User Management</h3>
+      <p class="text-gray-600">A complete list of all users in the system.</p>
+    </div>
 
-      <div class="feature">
-        <h3>User Actions</h3>
-        <a href="/users/create" class="btn btn-success">
-          <i class="fas fa-user-plus"></i>
+    <div class="mt-8 p-6 bg-white rounded-xl shadow-md space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800">User Actions</h3>
+        <a href="/users/create"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <i class="fas fa-user-plus mr-2"></i>
           Add New User
-        </a>
-        <a href="/users/list" class="btn btn-primary">
-          <i class="fas fa-list"></i>
-          View All Users
-        </a>
-        <a href="/users/search" class="btn btn-info">
-          <i class="fas fa-search"></i>
-          Search Users
         </a>
       </div>
 
-      <div class="feature">
-        <h3>Recent Users</h3>
-        <p>No users found. <a href="/users/create">Create your first user</a></p>
+      <!-- This is the key change: a div with the new custom class -->
+      <div class="table-container">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through each user in the 'users' list and display their data -->
+            <tr th:each="user : ${users}">
+              <td th:text="${user.name}"></td>
+              <td th:text="${user.email}"></td>
+            </tr>
+            <!-- Show a message if no users are found -->
+            <tr th:if="${#lists.isEmpty(users)}">
+              <td colspan="2" class="text-center text-gray-500">
+                No users found. <a href="/users/create" class="text-blue-600 hover:text-blue-800">Create your first
+                  user</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
