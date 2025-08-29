@@ -1,5 +1,5 @@
-# Use Eclipse Temurin 17 as the base image (replaces deprecated OpenJDK)
-FROM eclipse-temurin:17-jdk-jammy as build
+# Use Eclipse Temurin 21 as the base image (matches your project's Java version)
+FROM eclipse-temurin:21-jdk-jammy as build
 
 # Install Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
@@ -17,8 +17,8 @@ COPY src ./src
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Runtime stage - Use Eclipse Temurin JRE
-FROM eclipse-temurin:17-jre-jammy
+# Runtime stage - Use Eclipse Temurin JRE 21
+FROM eclipse-temurin:21-jre-jammy
 
 # Set working directory
 WORKDIR /app
