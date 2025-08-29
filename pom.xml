@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -7,19 +8,19 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<!-- Using the most recent parent version -->
 		<version>3.5.4</version>
-		<relativePath/>
+		<relativePath />
 	</parent>
-	
+
 	<groupId>com.itai</groupId>
 	<artifactId>itaiJavaPlay</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>itaiJavaPlay</name>
 	<description>Itai's Java Play - Full-stack Spring Boot app</description>
-	
+
 	<properties>
 		<java.version>21</java.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Spring Boot Starters -->
 		<dependency>
@@ -47,7 +48,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
+
 		<!-- Additional common dependencies -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -79,6 +80,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- for swagger -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
