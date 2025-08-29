@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Configuration
 public class SwaggerConfig {
@@ -18,23 +19,31 @@ public class SwaggerConfig {
 
   @Bean
   public OpenAPI customOpenAPI() {
-    // Create servers for both local and production
-    Server localServer = new Server()
-        .url("http://localhost:" + serverPort)
-        .description("Local Development Server");
+    List<Server> servers = new ArrayList<>();
 
-    Server productionServer = new Server()
+    // Local server
+    servers.add(new Server()
+        .url("http://localhost:" + serverPort)
+        .description("Local Development Server"));
+
+    // Railway server (existing)
+    servers.add(new Server()
         .url("https://itaijavaplay-production.up.railway.app")
-        .description("Production Server (Railway)");
+        .description("Production Server (Railway)"));
+
+    // Render server (new) - Update this with your actual Render URL
+    servers.add(new Server()
+        .url("https://your-render-app-name.onrender.com")
+        .description("Production Server (Render)"));
 
     return new OpenAPI()
         .info(new Info()
             .title("Itai Java Playground API")
             .version("1.0.0")
-            .description("Spring Boot application deployed on Railway with comprehensive API documentation")
+            .description("Spring Boot application deployed on Railway and Render with comprehensive API documentation")
             .contact(new Contact()
                 .name("Itai")
                 .url("https://itaijavaplay-production.up.railway.app/")))
-        .servers(List.of(localServer, productionServer));
+        .servers(servers);
   }
 }

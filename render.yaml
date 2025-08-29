@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: itai-java-playground
+    runtime: docker
+    plan: free
+    region: oregon # or singapore, frankfurt, ohio
+    branch: main
+    buildCommand: docker build -t itai-java-app .
+    startCommand: java -jar /app/app.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SERVER_PORT
+        value: 8080
+    healthCheckPath: /api/app/health
